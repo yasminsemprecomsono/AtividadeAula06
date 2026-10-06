@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CalculadoraStub implements Calculadora {
     @Override
     public int somar(int a, int b) {
-        return 10; // Responde sempre 10, sem fazer conta
+        return 10; // vai responder sempre dez, sem ter que contar
     }
 }
 
@@ -14,7 +14,7 @@ class CalculadoraStub implements Calculadora {
 class CalculadoraFake implements Calculadora {
     @Override
     public int somar(int a, int b) {
-        return a + b; // Faz a soma de verdade
+        return a + b; // vai fazer a soma verdadeira
     }
 }
 
@@ -24,7 +24,7 @@ class CalculadoraSpy implements Calculadora {
 
     @Override
     public int somar(int a, int b) {
-        quantidadeChamadas++; // Anota que o método foi executado
+        quantidadeChamadas++; // vai anotar que o método foi executado
         return a + b;
     }
 }
@@ -45,27 +45,27 @@ class CalculadoraMock implements Calculadora {
 public class CalculadoraTest {
 
     public static void main(String[] args) {
-        System.out.println("=== DEMONSTRAÇÃO DOS TEST DOUBLES ===\n");
+        System.out.println("- - Demostração Dos Testes - - \n");
 
-        // 1. DUMMY
+        // 1-DUMMY
         Calculadora dummy = null;
         System.out.println("1. Dummy: Objeto nulo apenas para preencher parâmetro -> " + dummy);
 
-        // 2. STUB
+        // 2-STUB
         Calculadora stub = new CalculadoraStub();
         System.out.println("2. Stub (Sempre retorna 10): " + stub.somar(2, 2));
 
-        // 3. FAKE
+        // 3-FAKE
         Calculadora fake = new CalculadoraFake();
         System.out.println("3. Fake (Soma simples 3+4): " + fake.somar(3, 4));
 
-        // 4. SPY
+        // 4-SPY
         CalculadoraSpy spy = new CalculadoraSpy();
         spy.somar(1, 1);
         spy.somar(2, 2);
         System.out.println("4. Spy (Quantidade de chamadas): " + spy.quantidadeChamadas);
 
-        // 5. MOCK
+        // 5-MOCK
         CalculadoraMock mock = new CalculadoraMock();
         mock.somar(5, 5);
         System.out.println("5. Mock (Chamou com 5 e 5?): " + mock.chamouComCinco);
